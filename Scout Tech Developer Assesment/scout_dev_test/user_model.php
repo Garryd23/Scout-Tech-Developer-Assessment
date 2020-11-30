@@ -18,14 +18,14 @@ class user_model{
                                 :job_title,
                                 :bio)';
 
-        $params = array(':username'=>$_POST['username'],
-                        ':email'=> $_POST['email'],
-                        ':password'=>$_POST['password'],
-                        ':mobile'=>$_POST['mobile'],
-                        ':name'=>$_POST['name'],
-                        ':surname'=>$_POST['surname'],
-                        ':job_title' =>$_POST['job_title'],
-                        ':bio'=>$_POST['bio']
+        $params = array(':username'=>strip_tags($_POST['username']),
+                        ':email'=> strip_tags($_POST['email']),
+                        ':password'=>strip_tags($_POST['password']),
+                        ':mobile'=>strip_tags($_POST['mobile']),
+                        ':name'=>strip_tags($_POST['name']),
+                        ':surname'=>strip_tags($_POST['surname']),
+                        ':job_title' =>strip_tags($_POST['job_title']),
+                        ':bio'=>strip_tags($_POST['bio'])
                     );
         
         $this->db->update_db($basecommand, $params);
@@ -62,13 +62,13 @@ class user_model{
                             bio  = :bio
                             where id=:id';
             
-            $params = array(':username'=>$_POST['username'],
-                            ':name'=>$_POST['name'],
-                            ':surname'=>$_POST['surname'],
-                            ':mobile'=>$_POST['mobile'],
-                            ':job_title'=>$_POST['jobTitle'],
-                            ':bio'=>$_POST['bio'],
-                            ':id'=>$_GET['us']
+            $params = array(':username'=>strip_tags($_POST['username']),
+                            ':name'=>strip_tags($_POST['name']),
+                            ':surname'=>strip_tags($_POST['surname']),
+                            ':mobile'=>strip_tags($_POST['mobile']),
+                            ':job_title'=>strip_tags($_POST['jobTitle']),
+                            ':bio'=>strip_tags($_POST['bio']),
+                            ':id'=>strip_tags($_GET['us'])
                             );
             
             return $this->db->update_db($basecommand, $params);
