@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        
+      <div id="errReport"></div>
 <form id="newUserForm" method="post">
   <div class="form-group">
     <label for="username">Username</label>
@@ -24,18 +24,17 @@
   </div> 
   <div class="form-group">
     <label for="email">Email address</label>
-    <p id="emailError" class="hasError form-text ">Email address is already in use.</p>
-    <input type="email" class="form-control" id="email" aria-describedby="emailInfo" required>
+    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailInfo" required>
     <small id="emailInfo" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
   <div class="form-group">
     <label for="password">Password</label>
+    <p id="passwordError" class="hasError form-text "></p>
     <input type="password" class="form-control" id="password" required>
   </div>
   <div class="form-group">
     <label for="mobile">Mobile Number</label>
-    <p id="mobileError" class="hasError form-text ">Mobile is already in use.</p>
-    <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="0831234567" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" aria-describedby="mobileInfo" required>
+    <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="0831234567"  aria-describedby="mobileInfo" required>
     <small id="mobileInfo" class="form-text text-muted">Please enter a 10-digit phone number. We'll never share your this with anyone else.</small>
   </div> 
   <div class="form-group">

@@ -9,12 +9,13 @@ $(document).ready(function() {
      $('#newUserBtn').on('click',()=>{
          $('#newUserModal').modal('toggle')
          $('#newUserForm')[0].reset();
-         $('#emailError').hide();
-         $('#mobileError').hide();
+        
         });
 
      $('#newUserForm').on('submit',function(e) {
+        
           e.preventDefault();
+            
           validateData();
           
           
@@ -58,27 +59,35 @@ $(document).ready(function() {
              console.log('nothing')
            },
             success:function(data) {
-               if(!data.validateData && !data.validateMobile){
+                console.log(data);
+                if(!data.validateData && !data.validateMobile){
                    newUser();
-               } else{
-                   if(data.validateData && data.validateMobile){
-                    $('#emailError').show();
-                    $('#mobileError').show();
-                    $("#newUserModal").scrollTop('100px');
-                   }else{
-                       if(data.validateData){
-                        $('#emailError').show();
-
-                       }
-                       else{
-                           if(data.validateMobile){
-                            $('#mobileError').show();
-                           }
-                       }
-                   }
+                } else{
                    
-                
-               }
+                    $("#newUserModal").scrollTop('100px');
+                    $('#errReport').empty().html(`
+                        <div class=" updateMessage alert alert-danger alert-dismissible fade show" role="alert">
+                        <span id="message">Sorry! There was an error, please fix the following fields:</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>`)
+
+                        if(data.validateData){
+                            
+                            $('#email').val("");
+                            $('#message').append('<br>-The email address is already in use')
+
+                        }
+
+                        if(data.validateMobile){
+                            
+                            $('#mobile').val("");
+                            $('#message').append('<br>-The mobile is already in use.')
+                        }
+                      
+                   }
+               
              
             }
         });
@@ -110,6 +119,16 @@ $(document).ready(function() {
              console.log(xhr.responseText);
            },
             success:function(data) {
+               
+              if(data.hasError){
+                $('#errReport').empty().html(`
+                <div class=" updateMessage alert alert-danger alert-dismissible fade show" role="alert">
+                <span id="message">Sorry! There was an error, please fix the following fields:</span>
+                ${data.errors}<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+              </div>`)
+              } else{ 
               $('#newUserModal').modal('toggle');  
               getUsers();
               $('#newStatus').empty().html(`
@@ -119,7 +138,8 @@ $(document).ready(function() {
                       <span aria-hidden="true">&times;</span>
                   </button>
               </div>`)
-              console.log(data);
+              
+              }
             }
         });
     }
