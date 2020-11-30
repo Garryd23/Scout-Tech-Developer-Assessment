@@ -1,0 +1,23 @@
+
+body>.container-fluid{
+    padding-top: 60px;
+}
+
+.updateMessage{
+    text-align: center;
+    margin-top: 10px;
+
+}
+
+.hasError{
+    color:red;
+}
+
+.usersTable{
+    margin-top: 20px;
+}
+
+.footer{
+    padding-top:40px;
+}
+
